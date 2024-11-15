@@ -23,10 +23,10 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item prop="role">
-        <el-radio v-model="form.role" label="2">读者</el-radio>
-        <el-radio v-model="form.role" label="1">管理员</el-radio>
-      </el-form-item>
+<!--      <el-form-item prop="role">-->
+<!--        <el-radio v-model="form.role" label="2"></el-radio>-->
+<!--        <el-radio v-model="form.role" label="1">管理员</el-radio>-->
+<!--      </el-form-item>-->
       <el-form-item prop="authorize" v-if="form.role==1">
         <el-input v-model="form.authorize" placeholder="请输入管理员注册码" clearable show-password>
           <template #prefix>

@@ -41,7 +41,7 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#iconreader "></use>
       </svg>
-      <span>读者管理</span>
+      <span>用户管理</span>
     </el-menu-item>
     <el-menu-item index="/book" v-if="user.role == 1" >
       <svg class="icon" aria-hidden="true">
@@ -55,11 +55,11 @@
       </svg>
       <span>图书查询</span>
     </el-menu-item>
-    <el-menu-item index="/lendrecord" v-if="user.role == 1">
+    <el-menu-item index="/mproj" v-if="user.role == 1">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#iconlend-record "></use>
       </svg>
-      <span>借阅管理</span>
+      <span>项目管理</span>
     </el-menu-item>
     <el-menu-item index="/lendrecord" v-if="user.role == 2">
       <svg class="icon" aria-hidden="true">
@@ -67,10 +67,36 @@
       </svg>
       <span>借阅信息</span>
     </el-menu-item>
-    <el-menu-item index="/bookwithuser" >
-      <el-icon><grid /></el-icon>
-      <span>借阅状态</span>
+    <el-menu-item index="/proj" v-if="user.role == 2">
+      <el-icon><HomeFilled /></el-icon>
+      <span>我的项目</span>
     </el-menu-item>
+    <el-menu-item index="/bookwithuser" v-if="user.role == 2">
+      <el-icon><grid /></el-icon>
+      <span>个人通知</span>
+    </el-menu-item>
+    <el-menu-item index="/feedback" v-if="user.role== 2">
+      <el-icon><Suitcase /></el-icon>
+      <span>反馈信息</span>
+    </el-menu-item>
+    <el-menu-item index="/mfeedback" v-if="user.role== 1">
+      <el-icon><Suitcase /></el-icon>
+      <span>反馈信息</span>
+    </el-menu-item>
+
+    <el-menu-item index="/safety" v-if="user.role == 2">
+      <el-icon><Flag /></el-icon>
+      <span>安全检查</span>
+    </el-menu-item>
+    <el-menu-item index="/msafety" v-if="user.role == 1">
+      <el-icon><Flag /></el-icon>
+      <span>安全检查</span>
+    </el-menu-item>
+    <el-menu-item index="/notice" v-if="user.role == 1">
+      <el-icon><Flag /></el-icon>
+      <span>通知管理</span>
+    </el-menu-item>
+
   </el-menu>
 
 </div>

@@ -11,7 +11,7 @@
         </el-form-item>
         <el-form-item label="权限">
             <span v-if="form.role==1" style="margin:5px">管理员</span>
-            <span v-if="form.role==2" style="margin:5px">读者</span>
+            <span v-if="form.role==2" style="margin:5px">工人</span>
         </el-form-item>
         <el-form-item label="电话号码">
           <el-input style="width: 80%" v-model="form.phone"></el-input>
@@ -20,6 +20,11 @@
           <div>
             <el-radio v-model="form.sex" label="男">男</el-radio>
             <el-radio v-model="form.sex" label="女">女</el-radio>
+          </div>
+        </el-form-item>
+        <el-form-item label="生日">
+          <div>
+            <ElDatePicker type="date" v-model="form.birthday"></ElDatePicker>
           </div>
         </el-form-item>
         <el-form-item label="地址">

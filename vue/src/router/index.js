@@ -42,6 +42,57 @@ const routes = [
         path: 'bookwithuser',
         name: 'BookWithUser',
         component: () => import("@/views/BookWithUser")
+      },
+      {
+        path: 'cperson',
+        name: 'CPerson',
+        component: () => import("@/views/CPerson")
+      },
+      {
+        path: 'feedback',
+        name: 'Feedback',
+        component: () => import("@/views/feedback")
+      },
+      {
+        path: 'safety',
+        name: 'Safety',
+        component: () => import("@/views/Safety")
+      },
+      {
+        path: 'proj',
+        name: 'Proj',
+        component: () => import("@/views/Proj")
+      },
+      {
+        path: 'task',
+        name: 'Task',
+        component: () => import("@/views/Task")
+      },
+      {
+        path: 'mfeedback',
+        name: 'MFeedback',
+        component: () => import("@/views/MFeedback")
+      },
+      {
+        path: 'notice',
+        name: 'Notice',
+        component: () => import("@/views/Notice")
+      },
+      {
+        path: 'mproj',
+        name: 'MProj',
+        component: () => import("@/views/MProj")
+      },
+      {
+        path: 'mtask',
+        name: 'MTask',
+        component: () => import("@/views/MTask")
+      },
+      {
+        path: 'msafety',
+        name: 'MSafety',
+        component: () => import("@/views/MSafety")
+
       }
     ]
   },

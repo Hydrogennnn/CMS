@@ -4,7 +4,7 @@
 <!-- 搜索-->
     <div style="margin: 10px 0;">
       <el-form inline="true" size="small">
-        <el-form-item label="读者编号" >
+        <el-form-item label="用户编号" >
       <el-input v-model="search1" placeholder="请输入读者编号"  clearable>
         <template #prefix><el-icon class="el-input__icon"><search/></el-icon></template>
       </el-input>
