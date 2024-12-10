@@ -1,4 +1,4 @@
-<template>
+/11<template>
   <div style="padding: 10px">
     <h2>我的项目</h2>
     <el-card v-for="(item,i) in projects" :key="i"
@@ -8,7 +8,7 @@
       <template #header>
         <div class="card-header">
           <span>项目 {{i+1}}</span>
-          <el-button class="button" text style="margin-left: 10px">任务管理</el-button>
+          <el-button class="button" text style="margin-left: 10px" @click="ToTask">任务管理</el-button>
         </div>
       </template>
       {{item}}
@@ -28,6 +28,7 @@
 import request from "../utils/request";
 import {ElMessage} from "element-plus";
 import moment from "moment";
+import router from "@/router";
 export default {
   created(){
     let userStr = sessionStorage.getItem("user") ||"{}"
@@ -36,6 +37,9 @@ export default {
   },
   name: 'feedback',
   methods: {
+    ToTask(){
+      router.push({path: '/task'});
+    },
     load(){
       ElMessage.warning("界面加载");
     }

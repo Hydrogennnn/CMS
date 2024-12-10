@@ -65,6 +65,8 @@ export default {
       ElMessage.warning("界面加载");
     },
     onSubmit(){
+      ElMessage.success("提交成功");
+
       console.log('submit!');
     }
   },

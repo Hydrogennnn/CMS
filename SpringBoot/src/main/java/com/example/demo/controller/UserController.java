@@ -40,6 +40,7 @@ public class UserController {
     @CrossOrigin
     @PostMapping("/login")
     public Result<?> login(@RequestBody User user){
+        System.out.println("请求/user/login");
         User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUsername,user.getUsername()).eq(User::getPassword,user.getPassword()));
         if(res == null)
         {

@@ -43,29 +43,17 @@
       </svg>
       <span>用户管理</span>
     </el-menu-item>
-    <el-menu-item index="/book" v-if="user.role == 1" >
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbook "></use>
-      </svg>
-      <span>书籍管理</span>
-    </el-menu-item>
-    <el-menu-item index="/book" v-if="user.role == 2">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbook "></use>
-      </svg>
-      <span>图书查询</span>
-    </el-menu-item>
+<!--    <el-menu-item index="/book" v-if="user.role == 1" >-->
+<!--      <svg class="icon" aria-hidden="true">-->
+<!--        <use xlink:href="#iconbook "></use>-->
+<!--      </svg>-->
+<!--      <span>书籍管理</span>-->
+<!--    </el-menu-item>-->
     <el-menu-item index="/mproj" v-if="user.role == 1">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#iconlend-record "></use>
       </svg>
       <span>项目管理</span>
-    </el-menu-item>
-    <el-menu-item index="/lendrecord" v-if="user.role == 2">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconlend-record"></use>
-      </svg>
-      <span>借阅信息</span>
     </el-menu-item>
     <el-menu-item index="/proj" v-if="user.role == 2">
       <el-icon><HomeFilled /></el-icon>

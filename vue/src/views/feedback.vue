@@ -5,7 +5,7 @@
       <h1>问题反馈</h1>
       <br>
       <el-input type="textarea" v-model="feedContent" style="width: 50%; padding-bottom: 10px  " rows="10" ></el-input><br>
-      <el-button size="large" type="primary">提交</el-button>
+      <el-button size="large" type="primary" @click="Submit">提交</el-button>
     </div>
 
   </div>
@@ -26,6 +26,9 @@ export default {
   },
   name: 'feedback',
   methods: {
+    Submit(){
+      ElMessage.success("反馈提交成功");
+    },
     load(){
       ElMessage.warning("界面加载");
     }

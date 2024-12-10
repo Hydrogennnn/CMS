@@ -5,7 +5,7 @@
     <div style="margin: 10px 0;">
       <el-form inline="true" size="small">
         <el-form-item label="用户编号" >
-      <el-input v-model="search1" placeholder="请输入读者编号"  clearable>
+      <el-input v-model="search1" placeholder="请输入用户编号"  clearable>
         <template #prefix><el-icon class="el-input__icon"><search/></el-icon></template>
       </el-input>
           </el-form-item >
@@ -34,6 +34,7 @@
     </div>
     <!-- 按钮-->
     <div style="margin: 10px 0;" >
+      <el-button @click="add">添加</el-button>
       <el-popconfirm title="确认删除?" @confirm="deleteBatch" v-if="user.role == 1">
         <template #reference>
           <el-button type="danger" size="mini" >批量删除</el-button>
@@ -76,30 +77,65 @@
       >
       </el-pagination>
 
-      <el-dialog v-model="dialogVisible" title="编辑读者信息" width="30%">
-        <el-form :model="form" label-width="120px">
-          <el-form-item label="用户名">
+      <el-dialog v-model="dialogVisible" title="编辑用户信息" width="30%">
+        <el-form :model="form" :rules="rules" ref="form"  label-width="120px">
+          <el-form-item label="用户名" prop="username">
             <el-input style="width: 80%" v-model="form.username"></el-input>
           </el-form-item>
-          <el-form-item label="昵称">
+          <el-form-item label="密码" prop="password">
+            <el-input style="width: 80%" v-model="form.password"></el-input>
+          </el-form-item>
+          <el-form-item label="昵称" prop="nickName">
             <el-input style="width: 80%" v-model="form.nickName"></el-input>
           </el-form-item>
-          <el-form-item label="电话号码">
+          <el-form-item label="电话号码" prop="phone">
             <el-input style="width: 80%" v-model="form.phone"></el-input>
           </el-form-item>
-          <el-form-item label="性别">
+          <el-form-item label="性别" prop="sex">
             <div>
               <el-radio v-model="form.sex" label="男">男</el-radio>
               <el-radio v-model="form.sex" label="女">女</el-radio>
             </div>
-          </el-form-item>
-          <el-form-item label="地址">
+          </el-form-item >
+          <el-form-item label="地址" prop="address">
             <el-input type="textarea" style="width: 80%" v-model="form.address"></el-input>
           </el-form-item>
         </el-form>
         <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="save">确 定</el-button>
+      </span>
+        </template>
+      </el-dialog>
+
+      <el-dialog v-model="dialogVisible2" title="添加用户" width="30%">
+        <el-form :model="form" :rules="rules" ref="form"  label-width="120px">
+          <el-form-item label="用户名" prop="username">
+            <el-input style="width: 80%" v-model="form.username"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input style="width: 80%" v-model="form.password"></el-input>
+          </el-form-item>
+          <el-form-item label="昵称" prop="nickName">
+            <el-input style="width: 80%" v-model="form.nickName"></el-input>
+          </el-form-item>
+          <el-form-item label="电话号码" prop="phone">
+            <el-input style="width: 80%" v-model="form.phone"></el-input>
+          </el-form-item>
+          <el-form-item label="性别" prop="sex">
+            <div>
+              <el-radio v-model="form.sex" label="男">男</el-radio>
+              <el-radio v-model="form.sex" label="女">女</el-radio>
+            </div>
+          </el-form-item >
+          <el-form-item label="地址" prop="address">
+            <el-input type="textarea" style="width: 80%" v-model="form.address"></el-input>
+          </el-form-item>
+        </el-form>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible2 = false">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
         </template>
@@ -177,40 +213,49 @@ export default {
 
 
     add(){
-      this.dialogVisible= true
+      this.dialogVisible2= true
       this.form ={}
     },
     save(){
-      if(this.form.id){
-        request.put("/user",this.form).then(res =>{
-          console.log(res)
-          if(res.code == 0){
-            ElMessage({
-              message: '更新成功',
-              type: 'success',
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          if(this.form.id){
+            request.put("/user",this.form).then(res =>{
+              console.log(res)
+              if(res.code == 0){
+                ElMessage({
+                  message: '更新成功',
+                  type: 'success',
+                })
+              }
+              else {
+                ElMessage.error(res.msg)
+              }
+
+              this.load() //不知道为啥，更新必须要放在这里面
+              this.dialogVisible = false
             })
           }
           else {
-            ElMessage.error(res.msg)
+            request.post("/user",this.form).then(res =>{
+              console.log(res)
+              if(res.code == 0){
+                ElMessage.success('添加成功')
+              }
+              else {
+                ElMessage.error(res.msg)
+              }
+              this.load()
+              this.dialogVisible = false
+            })
           }
+          console.log('表单提交成功', this.form);
+        } else {
+          console.log('表单验证失败');
+          return false;
+        }
+      });
 
-          this.load() //不知道为啥，更新必须要放在这里面
-          this.dialogVisible = false
-        })
-      }
-      else {
-        request.post("/user",this.form).then(res =>{
-          console.log(res)
-          if(res.code == 0){
-            ElMessage.success('添加成功')
-          }
-          else {
-            ElMessage.error(res.msg)
-          }
-          this.load()
-          this.dialogVisible = false
-        })
-      }
 
     },
 
@@ -231,7 +276,29 @@ export default {
   data() {
     return {
       form: {},
+      rules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ],
+        nickName: [
+          { required: true, message: '请输入昵称', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '请输入电话号码', trigger: 'blur' },
+          { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的电话号码', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        address: [
+          { required: true, message: '请输入地址', trigger: 'blur' }
+        ]
+      },
       dialogVisible : false,
+      dialogVisible2 : false,
       search1:'',
       search2:'',
       search3:'',
